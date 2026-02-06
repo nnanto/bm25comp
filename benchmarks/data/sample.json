@@ -1,0 +1,12 @@
+{
+  "doc_001": ["machine", "learning", "algorithms", "data", "science"],
+  "doc_002": ["deep", "learning", "neural", "networks", "ai"],
+  "doc_003": ["machine", "vision", "computer", "graphics"],
+  "doc_004": ["natural", "language", "processing", "nlp", "text"],
+  "doc_005": ["data", "mining", "analytics", "statistics"],
+  "doc_006": ["reinforcement", "learning", "agents", "rewards"],
+  "doc_007": ["supervised", "learning", "classification", "regression"],
+  "doc_008": ["unsupervised", "learning", "clustering", "dimensionality"],
+  "doc_009": ["neural", "networks", "deep", "learning", "tensorflow"],
+  "doc_010": ["machine", "learning", "scikit", "learn", "python"]
+}

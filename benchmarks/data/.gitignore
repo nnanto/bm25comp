@@ -1,0 +1,4 @@
+# Ignore all generated data files except sample.json
+*
+!.gitignore
+!sample.json
