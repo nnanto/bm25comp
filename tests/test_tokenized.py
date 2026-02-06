@@ -18,8 +18,8 @@ def test_add_tokenized_basic():
     builder.build()
 
     stats = builder.get_stats()
-    assert stats['num_documents'] == 2
-    assert stats['num_unique_terms'] == 3  # hello, world, peace
+    assert stats["num_documents"] == 2
+    assert stats["num_unique_terms"] == 3  # hello, world, peace
 
 
 def test_add_tokenized_vs_add():
@@ -40,9 +40,9 @@ def test_add_tokenized_vs_add():
     stats1 = builder1.get_stats()
     stats2 = builder2.get_stats()
 
-    assert stats1['num_documents'] == stats2['num_documents']
-    assert stats1['num_unique_terms'] == stats2['num_unique_terms']
-    assert stats1['average_document_length'] == stats2['average_document_length']
+    assert stats1["num_documents"] == stats2["num_documents"]
+    assert stats1["num_unique_terms"] == stats2["num_unique_terms"]
+    assert stats1["average_document_length"] == stats2["average_document_length"]
 
 
 def test_add_tokenized_custom_tokenization():
@@ -57,8 +57,8 @@ def test_add_tokenized_custom_tokenization():
     builder.build()
 
     stats = builder.get_stats()
-    assert stats['num_documents'] == 1
-    assert stats['average_document_length'] == 5
+    assert stats["num_documents"] == 1
+    assert stats["average_document_length"] == 5
 
 
 def test_add_tokenized_empty_list():
@@ -71,8 +71,8 @@ def test_add_tokenized_empty_list():
     builder.build()
 
     stats = builder.get_stats()
-    assert stats['num_documents'] == 2
-    assert stats['average_document_length'] == 0.5  # (0 + 1) / 2
+    assert stats["num_documents"] == 2
+    assert stats["average_document_length"] == 0.5  # (0 + 1) / 2
 
 
 def test_add_tokenized_mixed_with_add():
@@ -87,8 +87,8 @@ def test_add_tokenized_mixed_with_add():
     builder.build()
 
     stats = builder.get_stats()
-    assert stats['num_documents'] == 3
-    assert stats['num_unique_terms'] == 3  # hello, world, peace
+    assert stats["num_documents"] == 3
+    assert stats["num_unique_terms"] == 3  # hello, world, peace
 
 
 def test_add_tokenized_round_trip():
@@ -156,4 +156,4 @@ def test_add_tokenized_preserves_case_sensitivity():
 
     # Should have 4 unique terms (case-sensitive)
     stats = builder.get_stats()
-    assert stats['num_unique_terms'] == 4  # Hello, World, hello, world
+    assert stats["num_unique_terms"] == 4  # Hello, World, hello, world

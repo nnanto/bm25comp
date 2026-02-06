@@ -26,9 +26,9 @@ def test_incremental_processing():
 
     # Verify final state
     stats = builder.get_stats()
-    assert stats['num_documents'] == 2
-    assert stats['average_document_length'] == 2.0
-    assert stats['num_unique_terms'] == 3  # hello, world, peace
+    assert stats["num_documents"] == 2
+    assert stats["average_document_length"] == 2.0
+    assert stats["num_unique_terms"] == 3  # hello, world, peace
 
 
 def test_duplicate_keys_with_incremental():
@@ -50,7 +50,7 @@ def test_duplicate_keys_with_incremental():
     builder.build()
 
     stats = builder.get_stats()
-    assert stats['num_documents'] == 3
+    assert stats["num_documents"] == 3
 
 
 def test_no_document_storage():
@@ -61,7 +61,7 @@ def test_no_document_storage():
     builder.add("doc2", "more content")
 
     # Verify that we don't have a 'documents' attribute storing raw text
-    assert not hasattr(builder, 'documents')
+    assert not hasattr(builder, "documents")
 
     builder.build()
 
@@ -112,6 +112,6 @@ def test_large_batch_incremental():
 
     # Verify after build
     stats = builder.get_stats()
-    assert stats['num_documents'] == num_docs
-    assert stats['num_unique_terms'] > 0
+    assert stats["num_documents"] == num_docs
+    assert stats["num_unique_terms"] > 0
     assert len(builder.temp_postings) == 0  # Should be cleared

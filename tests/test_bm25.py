@@ -19,9 +19,9 @@ class TestBM25Builder:
         builder.build()
 
         stats = builder.get_stats()
-        assert stats['num_documents'] == 2
-        assert stats['num_unique_terms'] > 0
-        assert stats['average_document_length'] > 0
+        assert stats["num_documents"] == 2
+        assert stats["num_unique_terms"] > 0
+        assert stats["average_document_length"] > 0
 
     def test_key_mapping(self):
         """Test that keys are properly mapped to integers."""
@@ -45,7 +45,7 @@ class TestBM25Builder:
 
         # Both documents should be indexed
         stats = builder.get_stats()
-        assert stats['num_documents'] == 2
+        assert stats["num_documents"] == 2
 
         # But the key should only be mapped once
         assert len(builder.key_to_id) == 1
@@ -81,8 +81,8 @@ class TestBM25Builder:
         builder.build()
 
         stats = builder.get_stats()
-        assert stats['k1'] == 2.0
-        assert stats['b'] == 0.5
+        assert stats["k1"] == 2.0
+        assert stats["b"] == 0.5
 
 
 class TestBM25Reader:
@@ -113,8 +113,8 @@ class TestBM25Reader:
         reader.load(self.index_path)
 
         stats = reader.get_stats()
-        assert stats['num_documents'] == 3
-        assert stats['num_unique_terms'] > 0
+        assert stats["num_documents"] == 3
+        assert stats["num_unique_terms"] > 0
 
     def test_search(self):
         """Test searching for documents."""
@@ -172,8 +172,8 @@ class TestBM25Reader:
         reader.load(self.index_path)
 
         stats = reader.get_stats()
-        assert stats['k1'] == 1.5
-        assert stats['b'] == 0.75
+        assert stats["k1"] == 1.5
+        assert stats["b"] == 0.75
 
 
 class TestIntegration:
@@ -219,11 +219,11 @@ class TestIntegration:
             builder = BM25Builder()
             builder.add(
                 "https://example.com/articles/2024/01/15/very-long-url-path",
-                "article content here"
+                "article content here",
             )
             builder.add(
                 "/var/log/system/application/production/server-01/access.log",
-                "log entries here"
+                "log entries here",
             )
             builder.build()
             builder.save(index_path)

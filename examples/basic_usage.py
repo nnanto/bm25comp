@@ -59,8 +59,10 @@ def main():
 
     # Verify loaded stats match
     loaded_stats = reader.get_stats()
-    print(f"   Verified: {loaded_stats['num_documents']} documents, "
-          f"{loaded_stats['num_unique_terms']} terms")
+    print(
+        f"   Verified: {loaded_stats['num_documents']} documents, "
+        f"{loaded_stats['num_unique_terms']} terms"
+    )
 
     # Step 5: Search examples
     print("\n5. Search Examples:")
@@ -80,7 +82,7 @@ def main():
         if results:
             for rank, (doc_id, score) in enumerate(results, 1):
                 print(f"      {rank}. {doc_id:6s} (score: {score:.4f})")
-                print(f"         \"{documents[doc_id]}\"")
+                print(f'         "{documents[doc_id]}"')
         else:
             print("      No results found")
 

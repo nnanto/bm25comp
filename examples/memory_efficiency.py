@@ -29,7 +29,9 @@ def main():
 
     print(f"   Number of documents: {num_docs:,}")
     print(f"   Approximate size per document: {len(sample_text)} bytes")
-    print(f"   Total raw text size: ~{(len(sample_text) * num_docs) / (1024 * 1024):.2f} MB")
+    print(
+        f"   Total raw text size: ~{(len(sample_text) * num_docs) / (1024 * 1024):.2f} MB"
+    )
 
     # Build index
     print("\n2. Building index incrementally...")
@@ -56,16 +58,20 @@ def main():
     stats = builder.get_stats()
 
     # Rough estimates (not exact, but illustrative)
-    postings_size = stats['total_postings'] * 8  # doc_id (4) + freq (4)
-    doc_lengths_size = stats['num_documents'] * 8  # doc_id (4) + length (4)
-    key_mapping_size = stats['num_documents'] * 20  # rough estimate for key storage
+    postings_size = stats["total_postings"] * 8  # doc_id (4) + freq (4)
+    doc_lengths_size = stats["num_documents"] * 8  # doc_id (4) + length (4)
+    key_mapping_size = stats["num_documents"] * 20  # rough estimate for key storage
 
-    actual_size_mb = (postings_size + doc_lengths_size + key_mapping_size) / (1024 * 1024)
+    actual_size_mb = (postings_size + doc_lengths_size + key_mapping_size) / (
+        1024 * 1024
+    )
 
     print(f"   If we stored documents: ~{estimated_with_storage:.2f} MB")
     print(f"   Actual index size: ~{actual_size_mb:.2f} MB")
     print(f"   Memory saved: ~{estimated_with_storage - actual_size_mb:.2f} MB")
-    print(f"   Reduction: {((estimated_with_storage - actual_size_mb) / estimated_with_storage * 100):.1f}%")
+    print(
+        f"   Reduction: {((estimated_with_storage - actual_size_mb) / estimated_with_storage * 100):.1f}%"
+    )
 
     print(f"\n4. Index Statistics:")
     print(f"   Documents indexed: {stats['num_documents']:,}")

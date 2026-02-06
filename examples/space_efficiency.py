@@ -16,29 +16,14 @@ def main():
 
     # Simulate documents with long keys (e.g., URLs or file paths)
     documents = {
-        "https://example.com/articles/2024/01/15/introduction-to-machine-learning":
-            "machine learning introduction tutorial basics",
-
-        "https://example.com/articles/2024/01/16/deep-learning-fundamentals":
-            "deep learning neural networks fundamentals",
-
-        "https://example.com/articles/2024/01/17/natural-language-processing-guide":
-            "natural language processing nlp guide tutorial",
-
-        "https://example.com/articles/2024/01/18/computer-vision-basics":
-            "computer vision image processing basics",
-
-        "https://example.com/articles/2024/01/19/reinforcement-learning-intro":
-            "reinforcement learning agents rewards intro",
-
-        "/var/log/system/application/production/server-01/access-2024-01-15.log":
-            "server access log entries production system",
-
-        "/var/log/system/application/production/server-01/error-2024-01-15.log":
-            "error log entries production server system",
-
-        "/var/log/system/application/staging/server-02/access-2024-01-15.log":
-            "staging server access log system entries",
+        "https://example.com/articles/2024/01/15/introduction-to-machine-learning": "machine learning introduction tutorial basics",
+        "https://example.com/articles/2024/01/16/deep-learning-fundamentals": "deep learning neural networks fundamentals",
+        "https://example.com/articles/2024/01/17/natural-language-processing-guide": "natural language processing nlp guide tutorial",
+        "https://example.com/articles/2024/01/18/computer-vision-basics": "computer vision image processing basics",
+        "https://example.com/articles/2024/01/19/reinforcement-learning-intro": "reinforcement learning agents rewards intro",
+        "/var/log/system/application/production/server-01/access-2024-01-15.log": "server access log entries production system",
+        "/var/log/system/application/production/server-01/error-2024-01-15.log": "error log entries production server system",
+        "/var/log/system/application/staging/server-02/access-2024-01-15.log": "staging server access log system entries",
     }
 
     print(f"\n1. Document Keys Analysis:")
@@ -81,22 +66,26 @@ def main():
         for doc_id, freq in postings_list:
             original_key = builder.id_to_key[doc_id]
             # UTF-8 encoding + term freq as 4 bytes
-            estimated_uncompressed += len(original_key.encode('utf-8')) + 4
+            estimated_uncompressed += len(original_key.encode("utf-8")) + 4
 
     # Actual space used in postings: doc_id (4 bytes) + freq (4 bytes)
-    actual_postings_space = stats['total_postings'] * 8
+    actual_postings_space = stats["total_postings"] * 8
 
     # Add the key mapping overhead (stored once)
     key_mapping_overhead = sum(
-        4 +  # doc_id
-        4 +  # key_length
-        len(str(key).encode('utf-8'))  # key_bytes
+        4  # doc_id
+        + 4  # key_length
+        + len(str(key).encode("utf-8"))  # key_bytes
         for key in documents.keys()
     )
 
     actual_with_mapping = actual_postings_space + key_mapping_overhead
     space_saved = estimated_uncompressed - actual_with_mapping
-    savings_pct = (space_saved / estimated_uncompressed) * 100 if estimated_uncompressed > 0 else 0
+    savings_pct = (
+        (space_saved / estimated_uncompressed) * 100
+        if estimated_uncompressed > 0
+        else 0
+    )
 
     print(f"\n4. Space Savings (Postings Data Only):")
     print(f"   Without integer mapping: ~{estimated_uncompressed:,} bytes")

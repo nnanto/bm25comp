@@ -17,7 +17,7 @@ def custom_tokenizer(text: str) -> list[str]:
     - Filters out very short tokens
     """
     # Remove punctuation but keep alphanumeric and spaces
-    text = re.sub(r'[^\w\s]', '', text)
+    text = re.sub(r"[^\w\s]", "", text)
 
     # Split on whitespace
     tokens = text.split()
@@ -40,11 +40,11 @@ def stemming_tokenizer(text: str) -> list[str]:
     stemmed = []
     for token in tokens:
         # Remove 'ing', 'ed', 's'
-        if token.endswith('ing'):
+        if token.endswith("ing"):
             token = token[:-3]
-        elif token.endswith('ed'):
+        elif token.endswith("ed"):
             token = token[:-2]
-        elif token.endswith('s') and len(token) > 3:
+        elif token.endswith("s") and len(token) > 3:
             token = token[:-1]
         stemmed.append(token)
 
@@ -156,6 +156,7 @@ def main():
 
     # Cleanup
     import os
+
     os.remove("index_default.bm25")
     os.remove("index_custom.bm25")
     os.remove("index_stemmed.bm25")
