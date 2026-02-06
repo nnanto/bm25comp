@@ -123,6 +123,39 @@ for key, score in results:
     print(f"{key}: {score:.4f}")
 ```
 
+### Custom Tokenization in Search
+
+If you used custom tokenization when building your index, you can search with pre-tokenized query terms:
+
+```python
+from bm25comp import BM25Reader
+
+# Load the index (built with custom tokenization)
+reader = BM25Reader()
+reader.load("index.bm25")
+
+# Custom tokenizer function (should match the one used during indexing)
+def my_tokenizer(text):
+    tokens = text.lower().split()
+    return [t for t in tokens if len(t) > 2]
+
+# Tokenize your query using the same logic
+query = "quick dog"
+query_terms = my_tokenizer(query)
+
+# Search with pre-tokenized terms
+results = reader.search_tokenized(query_terms, top_k=10)
+
+for key, score in results:
+    print(f"{key}: {score:.4f}")
+```
+
+This is useful when:
+- You need consistent tokenization between indexing and searching
+- Using specialized tokenizers (NLTK, spaCy, etc.)
+- Applying stemming or lemmatization to queries
+- Working with domain-specific tokenization rules
+
 ## Binary Format Specification
 
 The binary format is designed to be language-agnostic and consists of:

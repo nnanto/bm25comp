@@ -9,7 +9,7 @@ description = "BM25 algorithm implementation with space-efficient, language-agno
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Naveen Anto", email = "nnanto@github.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -29,8 +29,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/bm25comp"
-Repository = "https://github.com/yourusername/bm25comp"
+Homepage = "https://github.com/nnanto/bm25comp"
+Repository = "https://github.com/nnanto/bm25comp"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -210,6 +210,43 @@ class BM25Reader:
         scores.sort(key=lambda x: x[1], reverse=True)
         return scores[:top_k]
 
+    def search_tokenized(
+        self, query_terms: List[str], top_k: int = 10
+    ) -> List[Tuple[str, float]]:
+        """
+        Search for documents matching pre-tokenized query terms.
+
+        Args:
+            query_terms: List of already tokenized query terms
+            top_k: Number of top results to return
+
+        Returns:
+            List of (key, score) tuples, sorted by score descending
+        """
+        if not self.loaded:
+            raise RuntimeError("Must call load() before searching")
+
+        # Get candidate documents (documents containing at least one query term)
+        candidate_docs = set()
+        for term in query_terms:
+            if term in self.postings:
+                for doc_id, _ in self.postings[term]:
+                    candidate_docs.add(doc_id)
+
+        # Score all candidate documents
+        scores = []
+        for doc_id in candidate_docs:
+            # Create a temporary query string for scoring (needed by score_document)
+            temp_query = " ".join(query_terms)
+            score = self.score_document(temp_query, doc_id)
+            if score > 0:
+                key = self.id_to_key[doc_id]
+                scores.append((key, score))
+
+        # Sort by score descending and return top k
+        scores.sort(key=lambda x: x[1], reverse=True)
+        return scores[:top_k]
+
     def get_stats(self) -> Dict[str, Any]:
         """
         Get statistics about the loaded index.
