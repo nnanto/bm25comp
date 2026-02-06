@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bm25comp"
-version = "0.1.0"
+version = "0.1.1"
 description = "BM25 algorithm implementation with space-efficient, language-agnostic binary serialization"
 readme = "README.md"
 requires-python = ">=3.8"
