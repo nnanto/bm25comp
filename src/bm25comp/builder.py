@@ -1,4 +1,3 @@
-import math
 import struct
 from collections import defaultdict
 from typing import Any, Dict, List
